@@ -129,7 +129,6 @@ void execute_command(char *command)
 {
 	pid_t child_pid;
 	int status;
-	char *args[2];
 	extern char **environ;
 
 	child_pid = fork();
@@ -141,9 +140,9 @@ void execute_command(char *command)
 
 	if (child_pid == 0)
 	{
-		if (execve(command, args, environ) == -1)
+		if (execve(args[0], args, environ) == -1)
 		{
-			fprintf(stderr, "%s: %d: %s: not found\n", progname, line_no, command);
+			fprintf(stderr, "%s: %d: %s: not found\n", progname, line_no, args[0]);
 			exit(127);
 		}
 	}
