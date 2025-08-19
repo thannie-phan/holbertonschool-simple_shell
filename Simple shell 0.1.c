@@ -109,7 +109,7 @@ char **split_string(char *str)
 	return (words_array);
 }
 
-void free_args(char **args);
+void free_args(char **args)
 {
 	int count;
 
