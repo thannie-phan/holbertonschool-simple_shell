@@ -109,6 +109,22 @@ char **split_string(char *str)
 	return (words_array);
 }
 
+void free_args(char **args);
+{
+	int count;
+
+	if (args == NULL)
+		return (NULL);
+
+	count = 0;
+	while (args[count] != NULL)
+	{
+		free(args[count]);
+		count++;
+	}
+	free(args);
+}
+
 void execute_command(char *command)
 {
 	pid_t child_pid;
@@ -163,7 +179,10 @@ int main(int argc, char **argv)
 		args = split_string(command);
 		
 		if (args != NULL)
-		    execute_command(args[0]);
+		{
+			execute_command(args[0]);
+			free_args(args);
+		}
 		    
 		free(command);
 		line_no++;
