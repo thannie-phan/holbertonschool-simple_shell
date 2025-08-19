@@ -2,8 +2,9 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
+#include <sys/wait.h>
 
-int main(void)
+int main(int ac, char **av, char **env)
 {
 	char *line = NULL;
 	size_t len = 0;
@@ -16,19 +17,19 @@ while (1)
 {
         /* Display prompt only if interactive */
 	if (interactive)
-		printf("$ ");
+		printf("cisfun ");
 
         /* Read command from user */
 	if (getline(&line, &len, stdin) == -1)
 	{
 		if (interactive)
 		{
-             /* actual input error */
-		   	fprintf(stderr, "%s: read: input error\n", av[0]);
-		    	break; /*exit */
+              /* actual input error */
+            printf("\n");
+            fprintf(sterr, "%s: read: input error\n" av[0]);
+		    break; /*exit */
 		}
 	}
-
         /* Remove newline character */
 	line[strcspn(line, "\n")] = '\0';
 
