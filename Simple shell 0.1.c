@@ -156,6 +156,8 @@ int main(int argc, char **argv)
 {
 	char *command;
 	char **args;
+	int count, notallspaces;
+	
 	(void)argc;
 	progname = argv[0];
 
@@ -172,6 +174,22 @@ int main(int argc, char **argv)
 			continue;
 		}
 		
+		count = 0, notallspaces = 0;
+		while (command[count] != '\0')
+		{
+			if (command[count] != ' ')
+			{
+				notallspaces = 1;
+			}
+			count++;
+		}
+		if (notallspaces == 0)
+		{
+			free(command);
+			line_no++;
+			continue;
+		}
+		
 		args = split_string(command);
 		
 		if (args != NULL)
@@ -182,7 +200,7 @@ int main(int argc, char **argv)
 		    
 		free(command);
 		line_no++;
-	}
+		}
 
-	return (0);
+		return (0);
 }
