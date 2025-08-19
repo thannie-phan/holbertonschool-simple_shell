@@ -27,14 +27,14 @@ char *read_input(void)
 	   
     charsRead = getline(&input_line, &size, stdin);
         
-        if (charsRead == -1) // if cannot read cause of wtv reason including end of file
+        if (charsRead == -1)
 		{
 			free(input_line);
 			return (NULL);
 		}
 
-    	if (charsRead > 0 && input_line[charsRead - 1] == '\n') // if the last character is a newline aka the end
-		    input_line[charsRead - 1] = '\0'; // replace newline with NULL to properly end the string
+    	if (charsRead > 0 && input_line[charsRead - 1] == '\n')
+		    input_line[charsRead - 1] = '\0';
 	
 return (input_line);
 }
@@ -50,7 +50,7 @@ void execute_command(char *command)
 	args[1] = NULL;
 
 	child_pid = fork();
-	if (child_pid == -1) // if cannot fork 
+	if (child_pid == -1)
 	{
 		perror("fork");
 		exit(1);
@@ -60,7 +60,7 @@ void execute_command(char *command)
 	{
 		if (execve(command, args, environ) == -1)
 		{
-			fprintf(stderr, "%s: %d: %s: not found\n", progname, line_no, command); // if cannot execute because command not found, same template as given
+			fprintf(stderr, "%s: %d: %s: not found\n", progname, line_no, command);
 			exit(127);
 		}
 	}
@@ -80,7 +80,7 @@ int main(int argc, char **argv)
 	{
 		command = read_input();
 		if (command == NULL)
-		    exit(0); //still exit but 0 cause no error unlike the above exit(1)
+		    exit(0);
 
 		if (strlen(command) == 0)
 		{
