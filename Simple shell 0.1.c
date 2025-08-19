@@ -132,9 +132,6 @@ void execute_command(char *command)
 	char *args[2];
 	extern char **environ;
 
-	args[0] = command;
-	args[1] = NULL;
-
 	child_pid = fork();
 	if (child_pid == -1)
 	{
@@ -180,7 +177,7 @@ int main(int argc, char **argv)
 		
 		if (args != NULL)
 		{
-			execute_command(args[0]);
+			execute_command(args);
 			free_args(args);
 		}
 		    
