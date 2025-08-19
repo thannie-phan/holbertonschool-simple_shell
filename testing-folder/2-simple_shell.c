@@ -15,7 +15,7 @@
  */
 int main(int ac, char **av, char **env)
 {
-	char *line;
+	char *line = NULL;
 	size_t len = 0;
 	ssize_t read;
 	pid_t child_pid;
@@ -23,9 +23,9 @@ int main(int ac, char **av, char **env)
 	int status;
 	int interactive_mode; /* 1 for interactive mode, 0 for non-interactive */
 	int line_count = 1;
-	interactive_mode = isatty(fileno(stdin));
 	(void)ac;
 
+	interactive_mode = isatty(0);
 	while (1) /* infinite loop */
 	{
 		/* print prompt in interactive mode */
