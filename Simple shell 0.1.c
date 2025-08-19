@@ -39,6 +39,76 @@ char *read_input(void)
 return (input_line);
 }
 
+int count_words(char *str)
+{
+	int count;
+	char *words;
+	
+	count = 0;
+	
+	words = strtok(str, " ");
+	while (words != NULL)
+	{
+		count++;
+		words = strtok(NULL, " ");
+	}
+
+	return (count);
+}
+
+char **split_string(char *str)
+{
+	char **words_array;
+	char *word, *str_copy, *copy_to_count;
+	int count, slot, free_count;
+	
+	slot = 0, free_count = 0;
+
+	if (str == NULL)
+		return (NULL);
+
+	copy_to_count = strdup(str);
+	if (copy_to_count == NULL)
+		return (NULL);
+
+	count = count_words(copy_to_count);
+	free(copy_to_count);
+
+	words_array = malloc(sizeof(char *) * (count + 1));
+	if (words_array == NULL)
+		return (NULL);
+	
+	str_copy = strdup(str);
+	if (str_copy == NULL)
+	{
+		free(words_array);
+		return (NULL);
+	}
+
+	word = strtok(str_copy, " ");
+	while (word != NULL)
+	{
+		words_array[slot] = strdup(word);
+		if (words_array[slot] == NULL)
+		{
+			while (free_count < slot)
+			{
+				free(words_array[free_count]);
+				free_count++;
+			}
+			free(words_array);
+			free(str_copy);
+			return (NULL);
+		}
+		slot++;
+		word = strtok(NULL, " ");
+	}
+
+	words_array[slot] = NULL;
+	free(str_copy);
+	return (words_array);
+}
+
 void execute_command(char *command)
 {
 	pid_t child_pid;
@@ -73,6 +143,7 @@ void execute_command(char *command)
 int main(int argc, char **argv)
 {
 	char *command;
+	char **args;
 	(void)argc;
 	progname = argv[0];
 
@@ -88,8 +159,12 @@ int main(int argc, char **argv)
 			line_no++;
 			continue;
 		}
-
-		execute_command(command);
+		
+		args = split_string(command);
+		
+		if (args != NULL)
+		    execute_command(args[0]);
+		    
 		free(command);
 		line_no++;
 	}
