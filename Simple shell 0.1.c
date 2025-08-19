@@ -125,7 +125,7 @@ void free_args(char **args)
 	free(args);
 }
 
-void execute_command(char *command)
+void execute_command(char **args)
 {
 	pid_t child_pid;
 	int status;
