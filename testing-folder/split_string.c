@@ -1,0 +1,81 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <sys/wait.h>
+#include <sys/types.h>
+
+/**
+ * count_words - function to count the number of words in the supplied
+ * string
+ * @str: pointer to the string to count
+ *
+ * Return: number of words in the string
+ */
+int count_words(char *str)
+{
+	int count;
+	char *words;
+
+	count = 0;
+
+	words = strtok(str, " ");
+	while (words != NULL)
+	{
+		count++;
+		words = strtok(NULL, " ");
+	}
+
+	return (count);
+}
+
+/**
+ * split_string - function to split a string into each word and store
+ * the words in a pointer array
+ * @str: pointer to string to split
+ *
+ * Return: pointer array of words
+ */
+char **split_string(char *str)
+{
+	char **words_array; /* array to store pointer to words */
+	char *word, *str_copy, *copy_to_count;
+	int count = 0, slot = 0;
+
+	if (str == NULL)
+		return (NULL);
+	copy_to_count = strdup(str);
+	if (copy_to_count == NULL) /* if strdup failed */
+		return (NULL);
+	count = count_words(copy_to_count);
+	free(copy_to_count);
+	if (count == 0) /* i.e. only spaces in string */
+		return (NULL);
+	/* allocate memory for number of commands and null byte */
+	words_array = malloc(sizeof(char *) * (count + 1));
+	if (words_array == NULL) /* if malloc fail */
+		return (NULL);
+	str_copy = strdup(str);
+	if (str_copy == NULL)
+	{
+		free(words_array);
+		return (NULL);
+	}
+	word = strtok(str_copy, " "); /* extract 1st word */
+	while (word != NULL)
+	{
+		/* duplicate current word into array slot */
+		words_array[slot] = strdup(word);
+		if (words_array[slot] == NULL) /* if dup fail, free memory */
+		{
+			free_args(words_array);
+			free(str_copy);
+			return (NULL);
+		}
+		slot++;
+		word = strtok(NULL, " "); /* get next word */
+	}
+	words_array[slot] = NULL; /* end with NULL after last word */
+	free(str_copy); /* free copy after tokenisation	*/
+	return (words_array);
+}
