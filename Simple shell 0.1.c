@@ -125,6 +125,24 @@ void free_args(char **args)
 	free(args);
 }
 
+char *_getenv(const char *name)
+{
+	extern char **environ;
+	
+	size_t len = strlen(name); // name is PATH, name_len will be 4 P A T H \0
+	int pos = 0;
+
+	while (environ[pos] != NULL) // while going through the environ array using position
+	{
+		if (strncmp(environ[pos], name, len) == 0 && *(environ[pos] + len) == '=')
+		{
+		    return (environ[pos] + len + 1);
+		}
+        pos++;
+    }
+    return (NULL);
+}
+
 char *find_command_in_path(char *command)
 {
     char *path_env, *path_copy, *directory, *full_path;
