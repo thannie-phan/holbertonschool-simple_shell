@@ -204,6 +204,7 @@ void execute_command(char **args)
 	if (executable_path == NULL)
 	{
 		fprintf(stderr, "%s: %d: %s: not found\n", progname, line_no, args[0]);
+		free(executable_path);
 		exit(127);
 	}
 		child_pid = fork();
