@@ -206,6 +206,10 @@ int execute_command(char **args)
 		fprintf(stderr, "%s: %d: %s: not found\n", progname, line_no, args[0]);
 		return (127);
 	}
+
+	if (strcmp(executable_path, "exit") == 0))
+		return (0);
+	
 		child_pid = fork();
 	
 	if (child_pid == -1)
@@ -229,7 +233,7 @@ int execute_command(char **args)
 		wait(&status);
 		free(executable_path);
 	}
-	return (0);
+	return (256);
 }
 
 int main(int argc, char **argv)
@@ -280,7 +284,7 @@ int main(int argc, char **argv)
 		
 		free(command);
 		
-		if (status != 0)
+		if (status != 256)
 			exit(status);
 		
 		line_no++;
