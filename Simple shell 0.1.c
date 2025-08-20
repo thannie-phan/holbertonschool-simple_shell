@@ -149,8 +149,7 @@ char *find_command_in_path(char *command)
     char *path_env, *path_copy, *directory, *full_path;
     int cmd_length;
 
-    /* if command has '/', check directly */
-    if (strchr(command, '/') != NULL)
+	if (strchr(command, '/') != NULL)
     {
         if (access(command, X_OK) == 0)
             return strdup(command);
@@ -202,7 +201,7 @@ void execute_command(char **args)
 	extern char **environ;
 	
 	executable_path = find_command_in_path(args[0]);
-	if (executable_path == NULL) // null check 
+	if (executable_path == NULL)
 	{
 		fprintf(stderr, "%s: %d: %s: not found\n", progname, line_no, args[0]);
 		return;
