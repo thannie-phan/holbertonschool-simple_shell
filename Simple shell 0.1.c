@@ -4,6 +4,7 @@
 #include <unistd.h>
 #include <sys/wait.h>
 #include <sys/types.h>
+#include <stddef.h>
 
 int line_no = 1;
 char *progname;
@@ -129,10 +130,10 @@ char *_getenv(const char *name)
 {
 	extern char **environ;
 	
-	size_t len = strlen(name); // name is PATH, name_len will be 4 P A T H \0
+	size_t len = strlen(name);
 	int pos = 0;
 
-	while (environ[pos] != NULL) // while going through the environ array using position
+	while (environ[pos] != NULL)
 	{
 		if (strncmp(environ[pos], name, len) == 0 && *(environ[pos] + len) == '=')
 		{
