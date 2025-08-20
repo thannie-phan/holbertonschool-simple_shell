@@ -207,7 +207,6 @@ void execute_command(char **args)
 		exit(127);
 	}
 		child_pid = fork();
-	}
 	
 	if (child_pid == -1)
 	{
