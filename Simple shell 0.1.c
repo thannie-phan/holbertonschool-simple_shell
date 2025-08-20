@@ -206,8 +206,11 @@ void execute_command(char **args)
 		fprintf(stderr, "%s: %d: %s: not found\n", progname, line_no, args[0]);
 		return;
 	}
-
-	child_pid = fork();
+	else
+	{
+		child_pid = fork();
+	}
+	
 	if (child_pid == -1)
 	{
 		perror("fork");
