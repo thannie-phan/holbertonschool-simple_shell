@@ -212,7 +212,7 @@ int execute_command(char **args)
 		return (0);
 	}
 	
-		child_pid = fork();
+	child_pid = fork();
 	
 	if (child_pid == -1)
 	{
