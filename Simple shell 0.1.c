@@ -192,7 +192,7 @@ char *find_command_in_path(char *command)
     return NULL;
 }
 
-void execute_command(char **args)
+int execute_command(char **args)
 {
 	pid_t child_pid;
 	int status;
@@ -229,6 +229,7 @@ void execute_command(char **args)
 		wait(&status);
 		free(executable_path);
 	}
+	return (0);
 }
 
 int main(int argc, char **argv)
