@@ -277,9 +277,10 @@ int main(int argc, char **argv)
 		{
 			if (strcmp(args[0], "exit") == 0)
 			{
-				exit (0);
 				free(args);
 				free(command);
+				exit(0);
+
 			}
 			status = execute_command(args);
 			free_args(args);
