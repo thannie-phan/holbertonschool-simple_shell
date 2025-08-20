@@ -125,30 +125,91 @@ void free_args(char **args)
 	free(args);
 }
 
+char *find_command_in_path(char *command)
+{
+    char *path_env, *path_copy, *directory, *full_path;
+    int cmd_length;
+
+    /* if command has '/', check directly */
+    if (strchr(command, '/') != NULL)
+    {
+        if (access(command, X_OK) == 0)
+            return strdup(command);
+        return NULL;
+    }
+
+    path_env = _getenv("PATH");
+    if (path_env == NULL)
+        return NULL;
+
+    path_copy = strdup(path_env);
+    if (path_copy == NULL)
+        return NULL;
+
+    cmd_length = strlen(command);
+    directory = strtok(path_copy, ":");
+
+    while (directory != NULL)
+    {
+        full_path = malloc(strlen(directory) + cmd_length + 2);
+        if (full_path == NULL)
+        {
+            free(path_copy);
+            return NULL;
+        }
+
+        sprintf(full_path, "%s/%s", directory, command);
+
+        if (access(full_path, X_OK) == 0)
+        {
+            free(path_copy);
+            return full_path;
+        }
+
+        free(full_path);
+        directory = strtok(NULL, ":");
+    }
+
+    free(path_copy);
+    return NULL;
+}
+
 void execute_command(char **args)
 {
 	pid_t child_pid;
 	int status;
+	char *executable_path;
+	
 	extern char **environ;
+	
+	executable_path = find_command_in_path(args[0]);
+	if (executable_path == NULL) // null check 
+	{
+		fprintf(stderr, "%s: %d: %s: not found\n", progname, line_no, args[0]);
+		return;
+	}
 
 	child_pid = fork();
 	if (child_pid == -1)
 	{
 		perror("fork");
+		free(executable_path);
 		exit(1);
 	}
 
 	if (child_pid == 0)
 	{
-		if (execve(args[0], args, environ) == -1)
+		if (execve(executable_path, args, environ) == -1)
 		{
 			fprintf(stderr, "%s: %d: %s: not found\n", progname, line_no, args[0]);
+			free(executable_path);
 			exit(127);
 		}
 	}
 	else
 	{
 		wait(&status);
+		free(executable_path);
 	}
 }
 
