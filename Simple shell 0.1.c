@@ -155,7 +155,7 @@ char *find_command_in_path(char *command)
             return strdup(command);
         return NULL;
     }
-
+	
     path_env = _getenv("PATH");
     if (path_env == NULL)
         return NULL;
@@ -206,11 +206,6 @@ int execute_command(char **args)
 		fprintf(stderr, "%s: %d: %s: not found\n", progname, line_no, args[0]);
 		return (127);
 	}
-
-	if (strcmp(executable_path, "exit") == 0)
-	{
-		return (0);
-	}
 	
 	child_pid = fork();
 	
@@ -235,7 +230,7 @@ int execute_command(char **args)
 		wait(&status);
 		free(executable_path);
 	}
-	return (256);
+	return (0);
 }
 
 int main(int argc, char **argv)
@@ -280,13 +275,17 @@ int main(int argc, char **argv)
 		
 		if (args != NULL)
 		{
+			if (strcmp(args[0], "exit") == 0)
+			{
+				exit (0);
+			}
 			status = execute_command(args);
 			free_args(args);
 		}
 		
 		free(command);
 		
-		if (status != 256)
+		if (status != 0)
 			exit(status);
 		
 		line_no++;
