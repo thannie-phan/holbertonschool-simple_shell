@@ -208,7 +208,9 @@ int execute_command(char **args)
 	}
 
 	if (strcmp(executable_path, "exit") == 0)
+	{
 		return (0);
+	}
 	
 		child_pid = fork();
 	
