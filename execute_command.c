@@ -1,4 +1,4 @@
-/*
+/**
  * execute_command - fork execve and wait execution
  * @args: command arguments
  * Return: Success
