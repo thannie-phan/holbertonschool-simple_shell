@@ -285,15 +285,13 @@ int main(int argc, char **argv)
 				{
 					exit(2);
 				}
-				else
-				{
-					exit(0);
-				}
+			else
+			{
 				free_args(args);
 				free(command);
 				exit(0);
 			}
-		
+			
 			status = execute_command(args);
 		
 			if (status != 0)
