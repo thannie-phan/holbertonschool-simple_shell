@@ -279,6 +279,9 @@ int main(int argc, char **argv)
 		
 		if (args != NULL)
 		{
+			free_args(args);
+			free(command);
+			
 			if (strcmp(args[0], "exit") == 0)
 			{
 				if (prev_fail != 0 && fail_at == line_no + 1)
@@ -287,9 +290,8 @@ int main(int argc, char **argv)
 				}
 			else
 			{
-				free_args(args);
-				free(command);
 				exit(0);
+			}
 			}
 			
 			status = execute_command(args);
@@ -312,6 +314,5 @@ int main(int argc, char **argv)
 		line_no ++;
 
 		}
-	}
 	return (0);
 }
