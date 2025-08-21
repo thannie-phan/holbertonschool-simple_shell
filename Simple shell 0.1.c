@@ -311,7 +311,7 @@ int main(int argc, char **argv)
 		free(command);
 		line_no ++;
 
-}
+		}
+	}
 	return (0);
-
 }
