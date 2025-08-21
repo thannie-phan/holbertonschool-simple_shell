@@ -230,7 +230,12 @@ int execute_command(char **args)
 		wait(&status);
 		free(executable_path);
 	}
-	return (0);
+	if (WIFEXITED(status))
+	{
+		return (WEXITSTATUS(status));
+	}
+	
+	return (1);
 }
 
 int main(int argc, char **argv)
