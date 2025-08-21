@@ -234,9 +234,9 @@ int execute_command(char **args)
 		{
 		return (WEXITSTATUS(status));
 		}
+	}
 	
 		return (1);
-}
 }
 
 int main(int argc, char **argv)
