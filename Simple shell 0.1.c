@@ -281,7 +281,7 @@ int main(int argc, char **argv)
                 free_args(args);
                 free(command);
 
-                if (prev_fail != 0 && fail_at == line_no)
+                if (prev_fail != 0)
 				{
 					exit(2);
 				}
