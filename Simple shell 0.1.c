@@ -237,7 +237,10 @@ int main(int argc, char **argv)
 {
 	char *command;
 	char **args;
-	int count, notallspaces, status;
+	int count, notallspaces, status, prev_fail, fail_at;
+
+	prev_fail = 0;
+	fail_at = 0;
 	
 	(void)argc;
 	progname = argv[0];
@@ -277,22 +280,37 @@ int main(int argc, char **argv)
 		{
 			if (strcmp(args[0], "exit") == 0)
 			{
+				if (prev_fail != 0 && failed at == line_no + 1)
+				{
+					exit(2);
+				}
+				else
+				{
+					exit(0);
+				}
 				free_args(args);
 				free(command);
 				exit(0);
-
 			}
+		
 			status = execute_command(args);
+		
+			if (status != 0 || status != 127)
+			{	
+				prev_failed = 1;
+		 		failed_at = line_no;
+			}
+			else
+			{	
+				prev_failed = 0;
+		 		failed_at = 0;
+			}
+		
 			free_args(args);
 		}
 		
 		free(command);
-		
-		if (status != 0)
-			exit(status);
-		
-		line_no++;
-		}
+		line_no ++;
 
 		return (0);
 }
