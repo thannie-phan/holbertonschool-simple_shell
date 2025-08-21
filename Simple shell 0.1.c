@@ -237,10 +237,9 @@ int main(int argc, char **argv)
 {
 	char *command;
 	char **args;
-	int count, notallspaces, status, prev_fail, fail_at;
+	int count, notallspaces, status, prev_fail;
 
 	prev_fail = 0;
-	fail_at = 0;
 
     (void)argc;
     progname = argv[0];
@@ -296,12 +295,10 @@ int main(int argc, char **argv)
             if (status != 0)
             {
                 prev_fail = 1;
-                fail_at = line_no;
             }
             else
             {
                 prev_fail = 0;
-                fail_at = 0;
             }
 
             free_args(args);
