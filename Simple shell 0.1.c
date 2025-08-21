@@ -259,6 +259,7 @@ int main(int argc, char **argv)
 		}
 		
 		count = 0, notallspaces = 0;
+		
 		while (command[count] != '\0')
 		{
 			if (command[count] != ' ')
@@ -295,7 +296,7 @@ int main(int argc, char **argv)
 		
 			status = execute_command(args);
 		
-			if (status != 0 || status != 127)
+			if (status != 0)
 			{	
 				prev_fail = 1;
 		 		fail_at = line_no;
@@ -312,6 +313,7 @@ int main(int argc, char **argv)
 		free(command);
 		line_no ++;
 
-		return (0);
 }
+	return (0);
+
 }
