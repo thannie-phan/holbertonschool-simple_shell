@@ -282,9 +282,13 @@ int main(int argc, char **argv)
                 free(command);
 
                 if (prev_fail != 0 && fail_at == line_no + 1)
-                    exit(2);
+				{
+					exit(2);
+				}
                 else
-                    exit(0);
+				{ 
+					exit(0);
+				}
             }
 
             status = execute_command(args);
