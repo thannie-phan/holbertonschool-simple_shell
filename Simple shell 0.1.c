@@ -241,78 +241,70 @@ int main(int argc, char **argv)
 
 	prev_fail = 0;
 	fail_at = 0;
-	
-	(void)argc;
-	progname = argv[0];
 
-	while (1)
-	{
-		command = read_input();
-		if (command == NULL)
-		    exit(0);
+    (void)argc;
+    progname = argv[0];
 
-		if (strlen(command) == 0)
-		{
-			free(command);
-			line_no++;
-			continue;
-		}
-		
-		count = 0, notallspaces = 0;
-		
-		while (command[count] != '\0')
-		{
-			if (command[count] != ' ')
-			{
-				notallspaces = 1;
-			}
-			count++;
-		}
-		if (notallspaces == 0)
-		{
-			free(command);
-			line_no++;
-			continue;
-		}
-		
-		args = split_string(command);
-		
-		if (args != NULL)
-		{
-			free_args(args);
-			free(command);
-			
-			if (strcmp(args[0], "exit") == 0)
-			{
-				if (prev_fail != 0 && fail_at == line_no + 1)
-				{
-					exit(2);
-				}
-			else
-			{
-				exit(0);
-			}
-			}
-			
-			status = execute_command(args);
-		
-			if (status != 0)
-			{	
-				prev_fail = 1;
-		 		fail_at = line_no;
-			}
-			else
-			{	
-				prev_fail = 0;
-		 		fail_at = 0;
-			}
-		
-			free_args(args);
-		}
-		
-		free(command);
-		line_no ++;
+    while (1)
+    {
+        command = read_input();
+        if (command == NULL)
+            exit(0);
 
-		}
-	return (0);
+        if (strlen(command) == 0)
+        {
+            free(command);
+            line_no++;
+            continue;
+        }
+
+        count = 0, notallspaces = 0;
+        while (command[count] != '\0')
+        {
+            if (command[count] != ' ')
+                notallspaces = 1;
+            count++;
+        }
+        if (notallspaces == 0)
+        {
+            free(command);
+            line_no++;
+            continue;
+        }
+
+        args = split_string(command);
+
+        if (args != NULL)
+        {
+            if (strcmp(args[0], "exit") == 0)
+            {
+                free_args(args);
+                free(command);
+
+                if (prev_fail != 0 && fail_at == line_no + 1)
+                    exit(2);
+                else
+                    exit(0);
+            }
+
+            status = execute_command(args);
+
+            if (status != 0)
+            {
+                prev_fail = 1;
+                fail_at = line_no;
+            }
+            else
+            {
+                prev_fail = 0;
+                fail_at = 0;
+            }
+
+            free_args(args);
+        }
+
+        free(command);
+        line_no++;
+    }
+    return (0);
 }
