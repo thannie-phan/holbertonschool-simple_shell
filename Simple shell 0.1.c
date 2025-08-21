@@ -280,7 +280,7 @@ int main(int argc, char **argv)
 		{
 			if (strcmp(args[0], "exit") == 0)
 			{
-				if (prev_fail != 0 && failed at == line_no + 1)
+				if (prev_fail != 0 && fail_at == line_no + 1)
 				{
 					exit(2);
 				}
@@ -297,13 +297,13 @@ int main(int argc, char **argv)
 		
 			if (status != 0 || status != 127)
 			{	
-				prev_failed = 1;
-		 		failed_at = line_no;
+				prev_fail = 1;
+		 		fail_at = line_no;
 			}
 			else
 			{	
-				prev_failed = 0;
-		 		failed_at = 0;
+				prev_fail = 0;
+		 		fail_at = 0;
 			}
 		
 			free_args(args);
