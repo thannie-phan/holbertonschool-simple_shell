@@ -229,11 +229,11 @@ int execute_command(char **args)
 	{
 		wait(&status);
 		free(executable_path);
-	}
-	if (WIFEXITED(status))
-	{
+
+		if (WIFEXITED(status))
+		{
 		return (WEXITSTATUS(status));
-	}
+		}
 	
 	return (1);
 }
