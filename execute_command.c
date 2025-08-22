@@ -6,15 +6,12 @@
 #include <sys/types.h>
 #include "simple_shell_header.h"
 
-extern int line_no;
-extern char *progname;
-
 /**
  * execute_command - fork a child process and execute command
  * @args: pointer to array of arguments
  * @exit_status: array for parent and child exit status
  *
- * Return: updated exit status array containing parent and child exit 
+ * Return: updated exit status array containing parent and child exit
  * status
  */
 
@@ -23,7 +20,6 @@ int *execute_command(char **args, int *exit_status)
 	pid_t child_pid;
 	int status;
 	char *executable_path;
-	extern char **environ;
 
 	executable_path = find_command_in_path(args[0]);
 	if (executable_path == NULL)
