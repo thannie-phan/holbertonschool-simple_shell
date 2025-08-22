@@ -157,7 +157,7 @@ char *find_command_in_path(char *command)
     }
 	
     path_env = _getenv("PATH");
-    if (path_env == NULL)
+    if (path_env == NULL || strlen(path_env) == 0)
         return NULL;
 
     path_copy = strdup(path_env);
@@ -169,7 +169,12 @@ char *find_command_in_path(char *command)
 
     while (directory != NULL)
     {
-        full_path = malloc(strlen(directory) + cmd_length + 2);
+        if (strlen(directory) == 0)
+		{
+			directory = ".";
+		}
+		
+		full_path = malloc(strlen(directory) + cmd_length + 2);
         if (full_path == NULL)
         {
             free(path_copy);
