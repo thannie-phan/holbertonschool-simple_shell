@@ -4,6 +4,7 @@
 #include <unistd.h>
 #include <sys/wait.h>
 #include <sys/types.h>
+#include "simple_shell_header.h"
 
 /**
  * read_input - read line from stdin, handle errors, and remove newline
