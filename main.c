@@ -6,6 +6,8 @@
 #include <sys/types.h>
 #include "simple_shell_header.h"
 
+int line_no;
+char *progname;
 /**
  * main - entry point for the shell
  * @argc: argument count
