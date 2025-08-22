@@ -149,11 +149,12 @@ char *_getenv(const char *name)
 void _printenv(void)
 {
 	extern char **environ;
+	char **temp = environ;
 
-	while (*environ != NULL)
+	while (*temp != NULL)
 	{
-		printf("%s\n", *environ);
-		environ++;
+		printf("%s\n", *temp);
+		temp++;
 	}
 }
 
@@ -287,6 +288,8 @@ int main(int argc, char **argv)
 			if (strcmp(args[0], "env") == 0)
 			{
 				_printenv();
+				free_args(args);
+				free(command);
 				continue;
 			}
 			exit_status = execute_command(args, exit_status);
