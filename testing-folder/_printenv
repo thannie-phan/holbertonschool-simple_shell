@@ -1,0 +1,17 @@
+#include <stdio.h>
+
+/**
+ * _printenv - prints the current environment variables
+ */
+void _printenv(void)
+{
+	extern char **environ;
+	char **env_copy;
+
+	env_copy = environ;
+	while (*env_copy != NULL)
+	{
+		printf("%s\n", *env_copy);
+		env_copy++;
+	}
+}
