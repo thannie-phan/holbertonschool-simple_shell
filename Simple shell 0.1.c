@@ -133,11 +133,6 @@ char *_getenv(const char *name)
 	size_t len = strlen(name);
 	int pos = 0;
 
-	if (environ == NULL)
-	{
-		return (NULL);
-	}
-
 	while (environ[pos] != NULL)
 	{
 		if (strncmp(environ[pos], name, len) == 0 && *(environ[pos] + len) == '=')
@@ -164,7 +159,7 @@ char *find_command_in_path(char *command)
     path_env = _getenv("PATH");
     if (path_env == NULL)
 	{
-		path_env = "/bin:/usr/bin";
+		return (NULL);
 	}
 
     path_copy = strdup(path_env);
@@ -175,12 +170,7 @@ char *find_command_in_path(char *command)
     directory = strtok(path_copy, ":");
 
     while (directory != NULL)
-    {
-        if (strlen(directory) == 0)
-		{
-			directory = ".";
-		}
-		
+    {		
 		full_path = malloc(strlen(directory) + cmd_length + 2);
         if (full_path == NULL)
         {
