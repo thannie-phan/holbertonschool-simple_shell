@@ -66,7 +66,8 @@ char **split_string(char *str)
 	char *word, *str_copy;
 	int slot, free_count;
 
-	slot = 0; free_count = 0;
+	slot = 0;
+	free_count = 0;
 
 	if (str == NULL)
 		return (NULL);
@@ -83,7 +84,6 @@ char **split_string(char *str)
 	word = strtok(str_copy, " "); /* extract 1st word */
 	while (word != NULL)
 	{
-		/* duplicate current word into array slot */
 		words_array[slot] = strdup(word);
 		if (words_array[slot] == NULL) /* if dup fail, free memory */
 		{
