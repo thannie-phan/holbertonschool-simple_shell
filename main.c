@@ -6,7 +6,7 @@
 #include <sys/types.h>
 #include "simple_shell_header.h"
 
-int line_no;
+int line_no = 1;
 char *progname;
 /**
  * main - entry point for the shell
