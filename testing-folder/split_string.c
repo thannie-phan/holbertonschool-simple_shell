@@ -42,7 +42,7 @@ char **split_string(char *str)
 	char *word, *str_copy, *copy_to_count;
 	int count, slot, free_count;
 
-	slot = 0;, free_count = 0;
+	slot = 0; free_count = 0;
 
 	if (str == NULL)
 		return (NULL);
@@ -75,7 +75,7 @@ char **split_string(char *str)
 		{
 			while (free_count < slot)
 			{
-				free_args(words_array[free_count]);
+				free(words_array[free_count]);
 				free_count++;
 			}
 			free(words_array);
