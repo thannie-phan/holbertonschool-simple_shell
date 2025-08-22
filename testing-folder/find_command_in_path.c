@@ -4,6 +4,7 @@
 #include <unistd.h>
 #include <sys/wait.h>
 #include <sys/types.h>
+#include "simple_shell_header.h"
 /**
  * find_command_in_path - search PATH for command
  * @command: input command to search
