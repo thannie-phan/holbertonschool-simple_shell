@@ -5,6 +5,10 @@
 #include <sys/wait.h>
 #include <sys/types.h>
 #include "simple_shell_header.h"
+
+int line_no;
+char *progname;
+
 /**
  * execute_command - fork a child process and execute command
  * @args: pointer to array of arguments
