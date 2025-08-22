@@ -6,8 +6,8 @@
 #include <sys/types.h>
 #include "simple_shell_header.h"
 
-int line_no = 1;
 char *progname;
+int line_no = 1;
 /**
  * main - entry point for the shell
  * @argc: argument count
@@ -18,25 +18,14 @@ int main(int argc, char **argv)
 {
 	char *command;
 	char **args;
-	int *exit_status;
-	int exit_code;
-
+	int exit_status[2] = {0, 0};
 	(void)argc;
 	progname = argv[0];
-	exit_status = malloc(sizeof(int) * 2);
-	exit_status[0] = 0;
-	exit_status[1] = 0;
-
 	while (1)
 	{
 		command = read_input();
 		if (command == NULL)
-		{
-			exit_code = exit_status[1];
-			free(exit_status);
-			exit(exit_code);
-		}
-		
+			exit(exit_status[1]);
 		args = split_string(command);
 		if (args != NULL)
 		{
@@ -44,9 +33,7 @@ int main(int argc, char **argv)
 			{
 				free_args(args);
 				free(command);
-				exit_code = exit_status[1];
-				free(exit_status);
-				exit(exit_code);
+				exit(exit_status[1]);
 			}
 			if (strcmp(args[0], "env") == 0)
 			{
@@ -55,19 +42,14 @@ int main(int argc, char **argv)
 				free(command);
 				continue;
 			}
-			exit_status = execute_command(args, exit_status);
+			memcpy(exit_status, execute_command(args, exit_status),
+					sizeof(exit_status));
 			free_args(args);
 		}
-
 		free(command);
 		if (exit_status[0] != 0)
-		{
-			exit_code = exit_status[0];
-                        free(exit_status);
-			exit(exit_code);
-		}
+			exit(exit_status[0]);
 		line_no++;
 	}
-		
-	return (exit_code);
+	return (exit_status[0]);
 }
