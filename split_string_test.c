@@ -29,7 +29,12 @@ int count_words(char *str)
 
 	return (count);
 }
-
+/**
+ * mem_words_array - allocate memory for words array
+ * @str: pointerto string
+ *
+ * Return: pointer array of words
+ */
 char **mem_words_array(char *str)
 {
 	char *copy_to_count;
@@ -72,7 +77,7 @@ char **split_string(char *str)
 	if (str == NULL)
 		return (NULL);
 	words_array = mem_words_array(str);
-	
+
 	if (words_array == NULL)
 		return (NULL);
 	str_copy = strdup(str);
