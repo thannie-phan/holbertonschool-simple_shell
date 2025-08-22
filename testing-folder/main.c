@@ -4,6 +4,8 @@
 #include <unistd.h>
 #include <sys/wait.h>
 #include <sys/types.h>
+#include "simple_shell_header.h"
+
 /**
  * main - entry point for the shell
  * @argc: argument count
@@ -14,38 +16,25 @@ int main(int argc, char **argv)
 {
 	char *command;
 	char **args;
-	int count, notallspaces, status;
+	int *exit_status;
+	int exit_code;
 
 	(void)argc;
 	progname = argv[0];
+	exit_status = malloc(sizeof(int) * 2);
+	exit_status[0] = 0;
+	exit_status[1] = 0;
 
 	while (1)
 	{
 		command = read_input();
 		if (command == NULL)
-		    exit(0);
-
-		if (strlen(command) == 0)
 		{
-			free(command);
-			line_no++;
-			continue;
+			exit_code = exit_status[1];
+			free(exit_status);
+			exit(exit_code);
 		}
-		count = 0, notallspaces = 0;
-		while (command[count] != '\0')
-		{
-			if (command[count] != ' ')
-			{
-				notallspaces = 1;
-			}
-			count++;
-		}
-		if (notallspaces == 0)
-		{
-			free(command);
-			line_no++;
-			continue;
-		}
+		
 		args = split_string(command);
 		if (args != NULL)
 		{
@@ -53,17 +42,30 @@ int main(int argc, char **argv)
 			{
 				free_args(args);
 				free(command);
-				exit(0);
-
+				exit_code = exit_status[1];
+				free(exit_status);
+				exit(exit_code);
 			}
-			status = execute_command(args);
+			if (strcmp(args[0], "env") == 0)
+			{
+				_printenv();
+				free_args(args);
+				free(command);
+				continue;
+			}
+			exit_status = execute_command(args, exit_status);
 			free_args(args);
 		}
-		free(command);
-		if (status != 0)
-			exit(status);
 
-		line_no++;
+		free(command);
+		if (exit_status[0] != 0)
+		{
+			exit_code = exit_status[0];
+                        free(exit_status);
+			exit(exit_code);
 		}
-		return (0);
+		line_no++;
+	}
+		
+	return (exit_code);
 }
