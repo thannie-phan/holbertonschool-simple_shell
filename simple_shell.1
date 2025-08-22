@@ -1,0 +1,96 @@
+.Dd 25/08/22
+.Dt simple_shell 1
+.Os Linux
+.Sh NAME
+.Nm simple_shell
+- a simple UNIX command line interpreter
+.Sh SYNOPSIS
+.Nm
+.Ri
+.Sh DESCRIPTION
+.Nm
+is a basic shell program that reads and executes commands typed by the user.
+It mimics the behavior of
+.Xr sh 1
+in both interactive and non-interactive modes. The shell progressed through several milestones:
+
+.Bl -tag -width ".It 0.1"
+.It 0.1 – Basic command execution
+.br
+• Executes single-word commands by full path.
+.br
+• Displays a prompt "$" and waits for input.
+.br
+• Does not support arguments or built-ins.
+.sp 0.5
+.It 0.2 – Command arguments
+.br
+• Supports commands with optional arguments.
+.br
+• Still does not handle PATH lookup or built-ins.
+.sp 0.5
+.It 0.3 – PATH handling
+.br
+• Looks up executables using the PATH environment variable.
+.br
+• Commands with arguments are supported.
+.sp 0.5
+.It 0.4 – exit built-in
+Adds the built-in
+.Pa exit
+.br
+• which exit/terminate the shell
+.sp 0.5
+.It 1.0 – env built-in
+Adds the built-in
+.Pa env
+.br
+• which prints the current environment variables.
+
+.Sh USAGE
+In interactive mode:
+
+.TP
+.B ./simple_shell
+Displays a prompt "$" and waits for user input.
+
+.TP
+.B ls -l /tmp
+Executes commands with arguments.
+
+In non-interactive mode:
+
+.TP
+.B echo "/bin/ls" | ./simple_shell
+Executes commands from a file or piped input.
+
+Built-in commands:
+
+.Bl -tag -width ".It exit"
+.It exit
+Terminates the shell.
+
+.It env
+Prints the current environment variables.
+.El
+
+.Sh RETURN VALUES
+.Nm
+returns 0 on successful execution of commands.
+Built-ins return 0 unless otherwise specified.
+
+.Sh FILES
+.Pa simple_shell.c
+.Pa shell.h
+.Pa execute.c
+.Pa builtins.c
+.Sh SEE ALSO
+.Xr sh 1 ,
+.Xr execve 2 ,
+.Xr fork 2 ,
+.Xr wait 2
+.Sh AUTHORS
+Developed by Holberton cohort 27 students: Sheeny Soulby, Madison Fleming & Thannie Phan
+.Sh BUGS
+.Nm
+does not support advanced shell features:
