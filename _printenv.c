@@ -11,7 +11,6 @@
  */
 void _printenv(void)
 {
-	extern char **environ;
 	char **env_copy;
 
 	env_copy = environ;

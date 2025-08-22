@@ -13,8 +13,6 @@
  */
 char *_getenv(const char *name)
 {
-	extern char **environ;
-
 	size_t len = strlen(name);
 	int pos = 0;
 
