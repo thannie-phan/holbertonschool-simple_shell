@@ -29,6 +29,34 @@ int count_words(char *str)
 
 	return (count);
 }
+/**
+ * mem_words_array - allocate memory for words array
+ * @str: pointerto string
+ *
+ * Return: pointer array of words
+ */
+char **mem_words_array(char *str)
+{
+	char *copy_to_count;
+	char **words_array;
+	int count;
+
+	copy_to_count = strdup(str);
+	if (copy_to_count == NULL) /* if strdup failed */
+	{
+		return (NULL);
+	}
+
+	count = count_words(copy_to_count);
+	free(copy_to_count);
+	if (count == 0) /* i.e. only spaces in string */
+	{
+		return (NULL);
+	}
+	/* allocate memory for number of commands and null byte */
+	words_array = malloc(sizeof(char *) * (count + 1));
+		return (words_array);
+}
 
 /**
  * split_string - function to split a string into each word and store
@@ -40,27 +68,18 @@ int count_words(char *str)
 char **split_string(char *str)
 {
 	char **words_array; /* array to store pointer to words */
-	char *word, *str_copy, *copy_to_count;
-	int count, slot, free_count;
+	char *word, *str_copy;
+	int slot, free_count;
 
-	slot = 0; free_count = 0;
+	slot = 0;
+	free_count = 0;
 
 	if (str == NULL)
 		return (NULL);
+	words_array = mem_words_array(str);
 
-	copy_to_count = strdup(str);
-	if (copy_to_count == NULL) /* if strdup failed */
+	if (words_array == NULL)
 		return (NULL);
-
-	count = count_words(copy_to_count);
-	free(copy_to_count);
-	if (count == 0) /* i.e. only spaces in string */
-		return (NULL);
-	/* allocate memory for number of commands and null byte */
-	words_array = malloc(sizeof(char *) * (count + 1));
-	if (words_array == NULL) /* if malloc fail */
-		return (NULL);
-
 	str_copy = strdup(str);
 	if (str_copy == NULL)
 	{
@@ -70,7 +89,6 @@ char **split_string(char *str)
 	word = strtok(str_copy, " "); /* extract 1st word */
 	while (word != NULL)
 	{
-		/* duplicate current word into array slot */
 		words_array[slot] = strdup(word);
 		if (words_array[slot] == NULL) /* if dup fail, free memory */
 		{
