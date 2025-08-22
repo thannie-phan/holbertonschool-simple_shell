@@ -8,10 +8,6 @@
 #include <sys/wait.h>
 #include <sys/types.h>
 
-extern int line_no;
-extern char *progname;
-extern char **environ;
-
 char *read_input(void);
 int count_words(char *str);
 char **split_string(char *str);
