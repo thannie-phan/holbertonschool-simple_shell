@@ -1,4 +1,6 @@
 ## Simple Shell
+![360_F_1295184842_Wpxn9uH9Tc0kwYDW2GbDtDBq55OGYZvT](https://github.com/user-attachments/assets/d45ea5a3-59fa-4f27-b910-00ba007d40e4)
+
 
 *A simplified UNIX command interpreter in C*
 
@@ -40,8 +42,6 @@ $ ./hsh
 
 
 ### Usage
-
-i would love to add an image or video of our shell running
 
 ```bash
 interactive mode:
