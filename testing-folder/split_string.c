@@ -40,13 +40,17 @@ char **split_string(char *str)
 {
 	char **words_array; /* array to store pointer to words */
 	char *word, *str_copy, *copy_to_count;
-	int count = 0, slot = 0;
+	int count, slot, free_count;
+
+	slot = 0;, free_count = 0;
 
 	if (str == NULL)
 		return (NULL);
+
 	copy_to_count = strdup(str);
 	if (copy_to_count == NULL) /* if strdup failed */
 		return (NULL);
+
 	count = count_words(copy_to_count);
 	free(copy_to_count);
 	if (count == 0) /* i.e. only spaces in string */
@@ -55,6 +59,7 @@ char **split_string(char *str)
 	words_array = malloc(sizeof(char *) * (count + 1));
 	if (words_array == NULL) /* if malloc fail */
 		return (NULL);
+
 	str_copy = strdup(str);
 	if (str_copy == NULL)
 	{
@@ -68,7 +73,12 @@ char **split_string(char *str)
 		words_array[slot] = strdup(word);
 		if (words_array[slot] == NULL) /* if dup fail, free memory */
 		{
-			free_args(words_array);
+			while (free_count < slot)
+			{
+				free_args(words_array[free_count]);
+				free_count++;
+			}
+			free(words_array);
 			free(str_copy);
 			return (NULL);
 		}

@@ -15,13 +15,13 @@ char *read_input(void)
 	char *input_line;
 	size_t size;
 	ssize_t charsRead;
-	int interactive_mode; /* 1 if interactive mode, 0 if non-interactive */
+	int mode; /* 1 if interactive mode, 0 if non-interactive */
 
 	input_line = NULL;
 	size = 0;
 	mode = isatty(0);
 
-	if (interactive_mode == 1)
+	if (mode == 1)
 	{
 		printf("#cisfun$ ");
 		fflush(stdout);
