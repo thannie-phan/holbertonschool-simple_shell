@@ -14,7 +14,9 @@ void free_args(char **args)
 	int count;
 
 	if (args == NULL)
+	{
 		return;
+	}
 
 	count = 0;
 	while (args[count] != NULL)
