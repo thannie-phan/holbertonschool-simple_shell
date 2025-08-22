@@ -25,19 +25,7 @@ We have built our shell from scratch using the foundation knowledge we have lear
 
 
 ### Flowchart
-add a flowchart pic
-
-
-
-### Authors
-
-Thannie Phan - https://github.com/thannie-phan
-
-Madison Fleming - https://github.com/madisonfleming
-
-Sheeny Soulsby - https://github.com/sheeny84
-
-
+<img width="578" height="612" alt="Screenshot 2025-08-22 at 3 12 13 pm" src="https://github.com/user-attachments/assets/3ea058fe-9fcd-4ea5-a752-5b7e96768419" />
 
 ### Installation
 
@@ -56,17 +44,20 @@ $ ./hsh
 i would love to add an image or video of our shell running
 
 ```bash
-#cisfun$ ...
+interactive mode:
 ```
+<img width="720" height="379" alt="interactive" src="https://github.com/user-attachments/assets/a454be4c-10b6-4c09-a8bc-3114813cca8c" />
 
-And be sure to specify any other minimum requirements like Python versions or operating systems.
+```bash
+non-interactive mode:
+```
+<img width="720" height="288" alt="non-interactive" src="https://github.com/user-attachments/assets/25c3328a-fb66-4e2c-9072-c18d9abb67f5" />
 
-*You may be inclined to add development instructions here, don't.*
 
+### Authors
 
-## Feedback and Contributing
+Thannie Phan - https://github.com/thannie-phan
 
-Add a link to the Discussions tab in your repo and invite users to open issues for bugs/feature requests.
+Madison Fleming - https://github.com/madisonfleming
 
-This is also a great place to invite others to contribute in any ways that make sense for your project. Point people to your DEVELOPMENT and/or CONTRIBUTING guides if you have them.
-
+Sheeny Soulsby - https://github.com/sheeny84
