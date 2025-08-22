@@ -4,6 +4,8 @@
 #include <unistd.h>
 #include <sys/wait.h>
 #include <sys/types.h>
+#include "simple_shell_header.h"
+
 /**
  * main - entry point for the shell
  * @argc: argument count
