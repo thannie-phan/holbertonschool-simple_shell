@@ -4,6 +4,7 @@
 #include <unistd.h>
 #include <sys/wait.h>
 #include <sys/types.h>
+#include "simple_shell_header.h"
 
 /**
  * _printenv - prints the current environment variables
