@@ -27,7 +27,11 @@ We have built our shell from scratch using the foundation knowledge we have lear
 
 
 ### Flowchart
-<img width="578" height="612" alt="Screenshot 2025-08-22 at 3 12 13 pm" src="https://github.com/user-attachments/assets/3ea058fe-9fcd-4ea5-a752-5b7e96768419" />
+The flowchart below shows the behaviour of the main function. There are three main helper functions that are called from main and are not simply copycat functions (like _printenv):
+- char *read_input(void)
+- char **split_string(char *str)
+- int *execute_command(char **args, int *exit_status)
+![SIMPLE SHELL GROUP PROJECT](https://github.com/user-attachments/assets/7efb8033-68b6-4274-9432-a5e23bfb834d)
 
 ### Installation
 
