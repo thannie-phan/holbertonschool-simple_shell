@@ -3,7 +3,7 @@
 .Os Linux
 .Sh NAME
 .Nm simple_shell
-- a simple UNIX command line interpreter
+\- a simple UNIX command line interpreter
 .Sh SYNOPSIS
 .Nm
 .Ri
@@ -12,8 +12,9 @@
 is a basic shell program that reads and executes commands typed by the user.
 It mimics the behavior of
 .Xr sh 1
-in both interactive and non-interactive modes. The shell progressed through several milestones:
-
+in both interactive and non-interactive modes.
+.Pp
+The shell runs in an loop, continue to take in user input and process them similar to a real Shell by being built in stages below
 .Bl -tag -width ".It 0.1"
 .It 0.1 – Basic command execution
 .br
@@ -46,44 +47,76 @@ Adds the built-in
 .Pa env
 .br
 • which prints the current environment variables.
-
 .Sh USAGE
 In interactive mode:
-
-.TP
-.B ./simple_shell
-Displays a prompt "$" and waits for user input.
-
-.TP
-.B ls -l /tmp
+.Bl -tag -width indent
+.It Ar ./simple_shell
+Displays a prompt 
+.Dq $
+and waits for user input.
 Executes commands with arguments.
-
+.El
+.Pp
 In non-interactive mode:
-
-.TP
-.B echo "/bin/ls" | ./simple_shell
+.Bl -tag -width indent
+.It Ar echo \&"/bin/ls\&" | ./simple_shell
 Executes commands from a file or piped input.
-
+.El
 Built-in commands:
-
 .Bl -tag -width ".It exit"
 .It exit
 Terminates the shell.
-
 .It env
 Prints the current environment variables.
 .El
-
 .Sh RETURN VALUES
 .Nm
 returns 0 on successful execution of commands.
 Built-ins return 0 unless otherwise specified.
 
+.Sh IMPLEMENTATION
+The shell is built around three main helper functions:
+.Bl -tag -width ".It execute_command"
+.It read_input
+.br
+• Reads user input from standard input.
+.sp 0.5
+.It split_string
+.br
+• Parses input string into command and arguments.
+.sp 0.5
+.It execute_command
+.br
+• Executes the parsed command in a child process.
+.br
+• Manages parent and child exit status.
+.El
+.Sh RETURN VALUES
+.Nm
+returns 0 on successful execution of commands.
+Built-ins return 0 unless otherwise specified.
+The shell maintains the exit status of the last executed command.
+.Sh FEATURES
+.Bl -bullet
+.It
+Interactive and non-interactive mode support
+.It
+PATH environment variable lookup
+.It
+Built-in command support
+.It
+Memory management with leak prevention
+.It
+Child process management
+.It
+Error handling for invalid commands
+.It
+Exit status preservation
+.El
 .Sh FILES
-.Pa simple_shell.c
-.Pa shell.h
-.Pa execute.c
-.Pa builtins.c
+.Pa simple_shell.1
+.Pa simple_shell_header.h
+
 .Sh SEE ALSO
 .Xr sh 1 ,
 .Xr execve 2 ,
@@ -93,4 +126,4 @@ Built-ins return 0 unless otherwise specified.
 Developed by Holberton cohort 27 students: Sheeny Soulby, Madison Fleming & Thannie Phan
 .Sh BUGS
 .Nm
-does not support advanced shell features:
+does not support advanced shell features.
