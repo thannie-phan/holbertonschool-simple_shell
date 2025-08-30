@@ -69,10 +69,7 @@ char **split_string(char *str)
 {
 	char **words_array; /* array to store pointer to words */
 	char *word, *str_copy;
-	int slot, free_count;
-
-	slot = 0;
-	free_count = 0;
+	int slot = 0;
 
 	if (str == NULL)
 		return (NULL);
@@ -92,12 +89,7 @@ char **split_string(char *str)
 		words_array[slot] = strdup(word);
 		if (words_array[slot] == NULL) /* if dup fail, free memory */
 		{
-			while (free_count < slot)
-			{
-				free(words_array[free_count]);
-				free_count++;
-			}
-			free(words_array);
+			free_args(words_array);
 			free(str_copy);
 			return (NULL);
 		}
