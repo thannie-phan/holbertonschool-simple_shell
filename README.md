@@ -24,6 +24,8 @@ The flowchart below shows the behaviour of the main function. There are three ma
 - char *read_input(void)
 - char **split_string(char *str)
 - int *execute_command(char **args, int *exit_status)
+Each of these functions has an associated flowchart which can be found at the bottom of this README.
+
 ![SIMPLE SHELL GROUP PROJECT](https://github.com/user-attachments/assets/7efb8033-68b6-4274-9432-a5e23bfb834d)
 
 
@@ -48,6 +50,15 @@ interactive mode and non-interactive mode:
 https://github.com/user-attachments/assets/517dce74-f97d-4756-a159-c7a8ed67ecac
 
 
+### Additional Flowcharts
+Read Input Function
+![SIMPLE SHELL GROUP PROJECT (2)](https://github.com/user-attachments/assets/ce58c45e-7c55-48c0-ad3b-d20721e139f0)
+
+Split String Function
+![SIMPLE SHELL GROUP PROJECT (3)](https://github.com/user-attachments/assets/8b95f018-21be-4e68-ae76-e5eba278cdc7)
+
+Execute Command Function
+![SIMPLE SHELL GROUP PROJECT (1)](https://github.com/user-attachments/assets/6e9c2d55-6e57-4570-9255-3c0cf541085f)
 
 
 ### Authors
