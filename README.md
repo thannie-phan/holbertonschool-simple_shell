@@ -26,7 +26,7 @@ The flowchart below shows the behaviour of the main function. There are three ma
 - int *execute_command(char **args, int *exit_status)
 Each of these functions has an associated flowchart which can be found at the bottom of this README.
 
-![SIMPLE SHELL GROUP PROJECT](https://github.com/user-attachments/assets/7efb8033-68b6-4274-9432-a5e23bfb834d)
+![SIMPLE SHELL GROUP PROJECT (4)](https://github.com/user-attachments/assets/d6e55a5e-6c46-4446-a43e-273db7a6f9ea)
 
 
 ### Installation
